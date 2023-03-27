@@ -34,14 +34,8 @@
 5. 코드 수정을 하면서 항상 어떤식으로 코드를 시작할 때부터 설계해야하는지 기록하기
 
 
-3/27 - 원카드 player 순서 - linkedList 구현 및 TDD
+3/27 - 원카드 player 순서 - linkedList 구현 및 TDD 진행
 1. 해결방안
    1) 개별 메서드라 생각하고 구현
    2) TDD 수행하여 오류 검증
    3) hardCoding 에 적용은 하지 않음 -> 개선 방향 1,2번을 고려해서 다시 oneCardcode 작성 후 주입해보기
-
-1. 구현방향
-   1) 먼저 일반적인 LinkedList 구현
-   2) LinkedList 구현 후 마지막 Node에 null이 아닌 첫 Node와 연결시키는 circleLinkedList 구현
-   3) Q는 역순으로도 이동이 가능해야하므로 doubleLinkedList 구현
-   4) doubleLinkedList 또한 처음과 끝의 Node를 연결해야하므로 circleLinkedList 구현

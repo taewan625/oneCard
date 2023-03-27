@@ -18,7 +18,8 @@ class Node {
 }
 
 class LinkedList {
-    Node head;
+    private Node head;
+    private Node tail;
 
     public LinkedList() {
         this.head = null;
@@ -29,18 +30,14 @@ class LinkedList {
 
         // 처음 노드가 없을 때 setting
         if (head == null) {
-            head = newNode;
-            return;
+            head = newNode;       //  동일 Node 객체 주소가짐
+            tail = newNode;       //  동일 Node 객체 주소가짐
+            newNode.next = head;  // .next에 처음 Node 주소 저장
+        }else {
+            tail.next = newNode; // tail.next에 새로운 Node 객체 주소로 변경 -> tail과 head는 같은 주소를 가지므로 head.next값도 변경됨
+            tail = newNode;      // tail과 연결된 객체 주소를 최신 것으로 변경
+            tail.next = head;    // 변경된 객체의 .next는 현재 null인 상태 -> 다시 처음 객체 주소인 head와 연결시켜서 circle 만듬
         }
-
-        // tmp라는 Node에 임시적으로 head 주소를 넣어서 .next가 null일 때 까지 계속 주소값을 덮어 쓸 것이다.
-        Node tmp = head;
-        // node객체의 .next가 null일 때까지 .next에 저장되어있는 node객체주소로 tmp주소를 변경
-        while (tmp.next != null) {
-            tmp = tmp.next;
-        }
-        // tmp 참조변수 안에는 실제 Node 객체의 주소가 들어있다. 그래서 tmp.next에 값을 넣어주면 실제 객체의 .next 값이 변한다.
-        tmp.next = newNode;
     }
 
     Node get(int index) {
