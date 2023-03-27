@@ -14,6 +14,11 @@ class LinkedListTest {
         for (int i = 0; i < b; i++) {
             list.get(i);
         }
+        // 내림차순 생성
+        for (int i = b; i < 0; i--) {
+            list.get(i);
+        }
+
         return true;
     }
 
@@ -25,12 +30,12 @@ class LinkedListTest {
         assertTrue(LinkedListImpl(1, 1));
         assertTrue(LinkedListImpl(7, 8));
     }
-//    @Test
+    @Test
     void addOverNum(){
         assertThrows(NullPointerException.class, () -> LinkedListImpl(1, 8));
         assertThrows(NullPointerException.class, () -> LinkedListImpl(6, 8));
     }
-    @Test
+//    @Test
     // linked 끝이 처음과 연결되어서 a < b 여도 정상 작동
     void addOverNumCircle() {
         assertTrue(LinkedListImpl(1, 8));

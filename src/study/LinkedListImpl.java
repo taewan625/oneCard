@@ -6,6 +6,7 @@ public class LinkedListImpl {
 class Node {
     int data;
     Node next;
+    Node prev;
 
     public Node(int data) {
         this.data = data;
@@ -32,11 +33,10 @@ class LinkedList {
         if (head == null) {
             head = newNode;       //  동일 Node 객체 주소가짐
             tail = newNode;       //  동일 Node 객체 주소가짐
-            newNode.next = head;  // .next에 처음 Node 주소 저장
         }else {
             tail.next = newNode; // tail.next에 새로운 Node 객체 주소로 변경 -> tail과 head는 같은 주소를 가지므로 head.next값도 변경됨
+            newNode.prev = head;    // 변경된 객체의 .next는 현재 null인 상태 -> 다시 처음 객체 주소인 head와 연결시켜서 circle 만듬
             tail = newNode;      // tail과 연결된 객체 주소를 최신 것으로 변경
-            tail.next = head;    // 변경된 객체의 .next는 현재 null인 상태 -> 다시 처음 객체 주소인 head와 연결시켜서 circle 만듬
         }
     }
 
