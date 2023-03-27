@@ -1,11 +1,10 @@
 /out/
 
-java.iml.idea/
 .idea/
-!/.idea/uiDesigner.xml
-!/.idea/!/.idea/misc.xml
-!/.idea/modules.xml
-!/.idea/vcs.xml
-!/.idea/workspace.xml
+*.iml
+*.xml
 
-!/java.iml
+.idea/
+*.iml
+*.iws
+*.ipr
