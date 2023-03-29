@@ -56,3 +56,17 @@ final player[] 번호 지정 : 원카드는 최대 7명이기 때문
 playerDeck : linkedList로 생성
 
 toString : terminal에서 card 내고난 후 자기 턴일 때 카드를 보여줘야하므로 toString을 overriding 함 -> TDD로 확인
+
+
+class OpenDeck 생성
+1. openDeckList linkedList collection 생성
+2. OneCard oneCard; 값이 null인 참조변수 생성
+   -> 처음 OpenDeck 객체 생성시 LinkedList가 비어있게 된다.
+   -> 그래서 openCard의 목적이 최근 카드를 보여주는 것이여도 당장에는 비워줘야한다.
+   -> 나중에 openDeckList에 값이 들어오게되면 getOpenCard()를 통해서 값을 받도록 한다.
+3. OneCard getOpenCard(){} : openDeckList의 마지막 객체 추출
+
+2.과정에 유의해서 TDD 수행
+  1) OpenDeck 생성
+  2) new OneCard()를 openDeckList에 넣어줌
+  3) getOopenCard()와 toString() check

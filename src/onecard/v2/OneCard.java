@@ -18,7 +18,7 @@ class OneCard {
 
     @Override
     public String toString() {
-        String[] kinds = {"CLOVER", "HEART", "DIAMOND", "SPADE", "COLOR_JOKER", "DARK_COLOR"};
+        String[] kinds = {"CLOVER", "HEART", "DIAMOND", "SPADE", "COLOR_JOKER", "DARK_JOKER"};
         //                    0        1          2        3          4              5
         String numbers = "A23456789XJQKS";
         return kinds[this.kind] + "-" + numbers.charAt(this.number);
