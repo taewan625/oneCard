@@ -39,3 +39,13 @@
    1) 개별 메서드라 생각하고 구현
    2) TDD 수행하여 오류 검증
    3) hardCoding 에 적용은 하지 않음 -> 개선 방향 1,2번을 고려해서 다시 oneCardcode 작성 후 주입해보기
+
+
+
+3월 29일
+class 별 method, field 그림 그리기
+너무 기능이 복잡해서 method 분리조차 힘든 상태
+기능이 아예 없는 상태로 생각해서 OneCard, OneCardDeck class 생성 - TDD 수행
+OneCard: 무늬, 숫자, 조커
+OneCardDeck: LinkedList로 덱 생성 기능만 수행
+TDD: card 개수 확인, card 각각 올바른 무늬와 숫자 포함하는지 확인
