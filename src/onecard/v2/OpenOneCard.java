@@ -1,4 +1,4 @@
-package onecard;
+package onecard.v2;
 
 class OpenOneCard {
     OneCard[] openOneCardArr = new OneCard[1];
