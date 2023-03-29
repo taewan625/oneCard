@@ -49,3 +49,10 @@ class 별 method, field 그림 그리기
 OneCard: 무늬, 숫자, 조커
 OneCardDeck: LinkedList로 덱 생성 기능만 수행
 TDD: card 개수 확인, card 각각 올바른 무늬와 숫자 포함하는지 확인
+
+
+class Player 생성
+final player[] 번호 지정 : 원카드는 최대 7명이기 때문
+playerDeck : linkedList로 생성
+
+toString : terminal에서 card 내고난 후 자기 턴일 때 카드를 보여줘야하므로 toString을 overriding 함 -> TDD로 확인

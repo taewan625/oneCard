@@ -1,24 +1,30 @@
 package onecard.v2;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 
 class Player {
-
-    OneCard[] playerOneCardArr;
-    OneCard[] changeOneCardArr;
-
-    public Player() {
-    }
-
-    public Player(OneCard[] getCard) {
-        this.playerOneCardArr = getCard;
-    }
-
+    int playerNum;
+    final int[] PLAYER_NUM = {0,1,2,3,4,5,6};
+    LinkedList<OneCard> playerDeck = new LinkedList<>();
     @Override
     public String toString() {
-        return Arrays.toString(playerOneCardArr);
+        String player = PLAYER_NUM[playerNum] + 1 + " Player";
+        return player + " : " + playerDeck ;
     }
 
+//    OneCard[] playerOneCardArr;
+//    OneCard[] changeOneCardArr;
+//
+//    public Player() {
+//    }
+//
+//    public Player(OneCard[] getCard) {
+//        this.playerOneCardArr = getCard;
+//    }
+//
+
+//
 //    void trashCard(int trashCardIndex) {
 //        // 중복 index를 이용해서 array의 제일 끝으로 보내고 임시 array에 복사후 원 array에 연결
 //        changeOneCardArr = new OneCard[playerOneCardArr.length - 1];
