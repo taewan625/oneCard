@@ -92,3 +92,7 @@ class Dealer 생성
 
 class CardGame 과 myLinkedList를 생성
 향후 플래이어 순서를 잘 다루기 위함
+
+GameApplication class 생성
+1. CardGame까지는 method만 넣고 싶고 실제 application에 scanner와 method만  최대한 사용되도록 노력
+2. 고민을 많이 했지만 더 복잡해지는 경향이생겨서 일단은 만들면서 진행중
