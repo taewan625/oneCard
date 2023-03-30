@@ -20,6 +20,18 @@ public class MyVector {
         return size;
     }
 
+    void add(Object obj) {
+        objArr[size++] = obj;
+        // 배열0부터 객체 넣어주고 객체 개수도 셀 수 있다.
+    }
+
+    Object get(int index) {
+        if (index < 0 || index > size) {
+            return null;
+        }
+        return objArr[index];
+    }
+
     public MyVector() {
         this(16);
     }

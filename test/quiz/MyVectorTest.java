@@ -23,6 +23,30 @@ class MyVectorTest {
     }
 
 
+    int size(int num) {
+        MyVector myVector = new MyVector();
+        for (int i = 0; i < num; i++) {
+            myVector.add(i);
+        }
+        return myVector.size();
+    }
+
+    boolean get(int size){
+        for (int i = 0; i < 10; i++) {
+            myVector.add(i);
+        }
+        Object obj = myVector.objArr[size];
+        Object getObj = myVector.get(size);
+        return obj.equals(getObj);
+    }
+    Object getNull(int size){
+        for (int i = 0; i < 10; i++) {
+            myVector.add(i);
+        }
+        return myVector.get(size);
+    }
+
+
     @Test
     void capacityTest() {
         assertEquals(16, capacity());
@@ -41,4 +65,21 @@ class MyVectorTest {
         assertThrows(IllegalArgumentException.class, ()->capacityObj(-3));
     }
 
+
+    @Test
+    void sizeTest() {
+        assertEquals(1,size(1));
+        assertEquals(16,size(16));
+        assertThrows(ArrayIndexOutOfBoundsException.class, ()->size(17));
+    }
+
+    @Test
+    void getTest() {
+        assertTrue(get(4));
+    }
+
+    @Test
+    void getNullTest() {
+        assertNull(getNull(-3));
+    }
 }
