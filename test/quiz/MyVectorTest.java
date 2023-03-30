@@ -1,6 +1,5 @@
 package quiz;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,6 +45,24 @@ class MyVectorTest {
         return myVector.get(size);
     }
 
+    int indexOf(int num, int objIndex) {
+        MyVector mv = new MyVector();
+        for (int i = 0; i < num; i++) {
+            mv.add(i);
+        }
+        Object o = mv.get(objIndex);
+        return mv.indexOf(o);
+    }
+
+
+    int remove(int num, int index) {
+        MyVector mv = new MyVector();
+        for (int i = 0; i < num; i++) {
+            mv.add(i);
+        }
+        mv.remove(mv.get(index));
+        return mv.size;
+    }
 
     @Test
     void capacityTest() {
@@ -80,6 +97,20 @@ class MyVectorTest {
 
     @Test
     void getNullTest() {
-        assertNull(getNull(-3));
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> getNull(-1));
+    }
+
+    @Test
+    void indexOfTest() {
+        assertEquals(3, indexOf(5,3));
+    }
+
+
+    @Test
+    void removeTest(){
+        assertEquals(9, remove(10,3));
+        assertEquals(6, remove(7,6));
+        assertEquals(2, remove(3,1));
+        assertThrows(IndexOutOfBoundsException.class, () -> remove(7, 7));
     }
 }

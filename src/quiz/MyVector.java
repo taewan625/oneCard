@@ -14,7 +14,7 @@ public class MyVector {
     }
 
     boolean isEmpty() {
-        return size == 0 ? true : false;
+        return size == 0; // 왜 그랬지...
     }
     int size() {
         return size;
@@ -27,9 +27,35 @@ public class MyVector {
 
     Object get(int index) {
         if (index < 0 || index > size) {
-            return null;
+            throw new ArrayIndexOutOfBoundsException();
         }
         return objArr[index];
+    }
+
+    int indexOf(Object obj) {
+        for (int i = 0; i < size; i++) {
+            if (objArr[i].equals(obj)) return i;
+        }
+        return -1;
+    }
+
+    boolean remove(Object obj) {
+        Object oldObj = null;
+        int index = indexOf(obj);
+        if (index == -1) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index != size - 1) {
+            System.arraycopy(objArr, index + 1, objArr, index, size - index - 1);
+            size--;
+            return true;
+        }
+        if (index == size -1) {
+            objArr[size - 1] = null;
+            size--;
+            return true;
+        }
+        return false;
     }
 
     public MyVector() {
@@ -43,5 +69,16 @@ public class MyVector {
         }
         this.capacity = capacity;
         objArr = new Object[capacity];
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer str = new StringBuffer("[ ");
+        for (int i = 0; i < size; i++) {
+            str.append(objArr[i]+" ");
+        }
+        str.append("]");
+        System.out.println("str = " + str);
+        return str.toString();
     }
 }
