@@ -10,10 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
     static OneCardDeck oneCardDeck = new OneCardDeck();
-    Player player = new Player();
+    Player player = new Player(0);
 
     boolean method(){
-        player.playerNum = 0;
         List<OneCard> oneCards = oneCardDeck.oneCardList.subList(0, 4);
         player.playerDeck.addAll(oneCards);
         System.out.println("player = " + player);

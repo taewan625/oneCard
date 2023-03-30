@@ -15,11 +15,20 @@ public class Dealer {
         Collections.shuffle(oneCardList);
     }
 
-//    해당 giveCard는 실제 게임을 돌리게 되면 player에게 sublist해서 카드 주는 코드를 매됨 작성하게 된다.
+//    해당 giveCard는 실제 게임을 돌리게 되면 player에게 sublist해서 카드 주는 코드를 매번 작성하게 된다.
 //    List<OneCard> giveCard(int giveNum) {
 //        LinkedList<OneCard> oneCardList = oneCardDeck.oneCardList;
 //        return oneCardList.subList(0, giveNum);
 //    }
+    void givCard(OpenDeck openDeck, int cards) {
+        LinkedList<OneCard> openDeckList = openDeck.openDeckList;
+        List<OneCard> oneCards = oneCardDeck.oneCardList.subList(0, cards);
+        openDeckList.addAll(oneCards);
+
+        LinkedList copyOneCards = new LinkedList<>(oneCards);
+        oneCardDeck.oneCardList.removeAll(copyOneCards);
+    }
+
     void giveCard(Player player, int cards) {
         // 중요 ->  매개변수를 잘 이용하면 class 안에 다른 class의 객체를 생성하지 않아도 해당 method처럼 활용이 가능하다.
         LinkedList<OneCard> playerDeck = player.playerDeck;
@@ -29,7 +38,7 @@ public class Dealer {
         /**
          * removeAll()에 oneCards 사용시 :
          * removeAll() 메서드가 실행되는 동안 반복자가 여전히 해당 컬렉션의 요소를 탐색
-         * 컬렉션을 수정하면서 동시에 해당 컬렉션을 탐색하는 경우 발생할 수 있는 ConcurrentModificationException 발새
+         * 컬렉션을 수정하면서 동시에 해당 컬렉션을 탐색하는 경우 발생할 수 있는 ConcurrentModificationException 발생
          * 해결 :
          * 복사본을 만들어서 복사본에서 removeAll() 수행
          */

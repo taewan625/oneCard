@@ -1,12 +1,20 @@
 package onecard.v2;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 
 class Player {
-    int playerNum;
+    private int playerNum;
     final int[] PLAYER_NUM = {0,1,2,3,4,5,6};
     LinkedList<OneCard> playerDeck = new LinkedList<>();
+
+    public int getPlayerNum() {
+        return playerNum;
+    }
+
+    public Player(int playerNum) {
+        this.playerNum = playerNum;
+    }
+
     @Override
     public String toString() {
         String player = PLAYER_NUM[playerNum] + 1 + " Player";

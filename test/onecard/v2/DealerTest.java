@@ -42,13 +42,13 @@ class DealerTest {
 //        return playerDeck.size();
 //    }
     int playerDeck(int giveNum){ // 실제 게임에서는
-        Player player = new Player(); // method() 밖으로 꺼내면 size()가 중첩 됨
+        Player player = new Player(0); // method() 밖으로 꺼내면 size()가 중첩 됨
         dealer.giveCard(player, giveNum);
         return player.playerDeck.size();
     }
 
     int oneCardDeck(int giveNum){
-        Player player = new Player(); // method() 밖으로 꺼내면 size()가 중첩 됨
+        Player player = new Player(0); // method() 밖으로 꺼내면 size()가 중첩 됨
         dealer.giveCard(player, giveNum);
         return dealer.oneCardDeck.oneCardList.size();
     }
