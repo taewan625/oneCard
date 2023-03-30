@@ -96,3 +96,21 @@ class CardGame 과 myLinkedList를 생성
 GameApplication class 생성
 1. CardGame까지는 method만 넣고 싶고 실제 application에 scanner와 method만  최대한 사용되도록 노력
 2. 고민을 많이 했지만 더 복잡해지는 경향이생겨서 일단은 만들면서 진행중
+
+
+
+Application 만드는 중 player가 카드 주는 것 안만들어서 Dealer에 만들고 tdd 수행
+
+GameApplication 작성
+1. 플레이어수
+2. 플레이어 카드 제공
+3. open카드 생성
+4. 플레이어 회전하도록 순서 linkedList next()이용
+<개발 모드 - 모든 필드 개수 체크>
+5. 카드 낼거 없을 때
+6. 카드 낼거 있을 때 -> openDeck 개수 안들었는데 field를 밖으로 지정하니깐 생긴 문제. 해결은 함 -- 내일 한번더 보기
+
+todo
+oneCarddeck 개수 적을 때 - reset()
+게임 종료 코드 작성
+oneCard class Equals() - 조커 범위 늘려주기

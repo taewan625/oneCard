@@ -20,7 +20,7 @@ public class Dealer {
 //        LinkedList<OneCard> oneCardList = oneCardDeck.oneCardList;
 //        return oneCardList.subList(0, giveNum);
 //    }
-    void givCard(OpenDeck openDeck, int cards) {
+    void giveCard(OpenDeck openDeck, int cards) {
         LinkedList<OneCard> openDeckList = openDeck.openDeckList;
         List<OneCard> oneCards = oneCardDeck.oneCardList.subList(0, cards);
         openDeckList.addAll(oneCards);
@@ -44,6 +44,13 @@ public class Dealer {
          */
         LinkedList copyOneCards = new LinkedList<>(oneCards);
         oneCardDeck.oneCardList.removeAll(copyOneCards);
+    }
+
+    void getCard(OpenDeck openDeck, Player player, OneCard card) {
+        // 중요 ->  매개변수를 잘 이용하면 class 안에 다른 class의 객체를 생성하지 않아도 해당 method처럼 활용이 가능하다.
+        LinkedList<OneCard> playerDeck = player.playerDeck;
+        playerDeck.remove(card);
+        openDeck.openDeckList.add(card);
     }
 
 

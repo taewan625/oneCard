@@ -24,6 +24,7 @@ class OneCard {
         return kinds[this.kind] + "-" + numbers.charAt(this.number);
     }
 
+    // color_joker와 dark joker 한해서 equals 범위 늘려주기
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof OneCard) {

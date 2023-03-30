@@ -77,6 +77,23 @@ class DealerTest {
         return last == oneCard;
     }
 
+    boolean getCard() {
+        LinkedList<OneCard> oneCardList = dealer.oneCardDeck.oneCardList;
+        Player player = new Player(1);
+        player.playerDeck.add(new OneCard(2,2));
+        player.playerDeck.add(new OneCard(1,2));
+
+        dealer.getCard(openDeck, player, new OneCard(1,2));
+
+        System.out.println(player.playerDeck);
+        System.out.println(new OneCard(1,2));
+        System.out.println(openDeck.getOpenCard());
+
+        return Objects.equals(new OneCard(1,2), openDeck.getOpenCard());
+    }
+
+
+
     @Test
     void shuffleTest() {
         assertTrue(shuffle()); // 동일한 위치에 동일한 카드가 5개 미만이면 true;
@@ -104,4 +121,9 @@ class DealerTest {
         assertTrue(resetCard());
     }
 
+
+    @Test
+    void getCardTest() {
+        assertTrue(getCard());
+    }
 }

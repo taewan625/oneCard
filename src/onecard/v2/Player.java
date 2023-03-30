@@ -8,7 +8,7 @@ class Player {
     LinkedList<OneCard> playerDeck = new LinkedList<>();
 
     public int getPlayerNum() {
-        return playerNum;
+        return playerNum + 1;
     }
 
     public Player(int playerNum) {

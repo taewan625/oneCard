@@ -12,9 +12,13 @@ public class CardGame {
     }
 
 
+    Player getPlayer(int index){
+        Player player = (Player) (playerLinkedList.get(index)).data;
+        return player;
+    }
+
+
 
 
 
 } // class 끝
-
-

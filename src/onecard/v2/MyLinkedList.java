@@ -77,7 +77,7 @@ public class MyLinkedList {
 
     public void next() {
         if (current == null) {
-            System.out.println("Current node is null");
+            current = head;
             return;
         }
 
@@ -86,7 +86,7 @@ public class MyLinkedList {
 
     public void prev() {
         if (current == null) {
-            System.out.println("Current node is null");
+            current = head;
             return;
         }
 
