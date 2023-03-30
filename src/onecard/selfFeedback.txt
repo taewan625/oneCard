@@ -70,3 +70,23 @@ class OpenDeck 생성
   1) OpenDeck 생성
   2) new OneCard()를 openDeckList에 넣어줌
   3) getOopenCard()와 toString() check
+
+
+3월 30일
+class Dealer 생성
+0. oneCardDeck 생성
+    OneCardDeck은 deck으로써의 의미 밖에 없어서 Dealer말고는 사용하는 class가 없어서 게임 시작때 딜러만 호출하면 바로 사용 가능하도록
+    dealer 내부에 oneCardDeck 생성
+1. shuffle()
+    원카드덱 섞기 - tdd 수행
+2. giveCard()
+    player에게 카드주기
+3. resetCard()
+    원카드 덱 카드 부족시 openDeck 한장 남기고 카드 주기
+
+* 2,3 번 같은 경우 subList를 통해서 카드를 주도록 구성했다.
+    subList는 subList하는 collection의 요소를 삭제하지는 않기 때문에 removeAll()을 이용해야한다.
+    이때 subList의 list와 removeAll() 대상이 동일 collection으로 부터 왔기 때문에 ConcurrentModificationException 발생한다.
+    컬렉션을 수정하면서 동시에 해당 컬렉션을 탐색하는 경우 발생하는 에러
+    해결 : subList의 복사본을 만들어서 복사본에서 removeAll() 수행
+
