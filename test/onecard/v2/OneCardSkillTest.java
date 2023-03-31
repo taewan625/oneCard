@@ -9,6 +9,8 @@ class OneCardSkillTest {
     OneCardSkill oneCardSkill = new OneCardSkill();
     boolean bool = true;
 
+    int attackCard = 3;
+
 
     @Test
     void QOrder() {
@@ -54,4 +56,18 @@ class OneCardSkillTest {
             }
         }
     }
+
+    int AAttack() {
+        OneCard openCard = new OneCard(1, 0);
+        OneCard submitCard = new OneCard(0, 0);
+        attackCard = oneCardSkill.Acard(openCard, submitCard, attackCard);
+        return attackCard;
+    }
+
+    @Test
+    void AttackTest() {
+        assertEquals(6,AAttack());
+    }
+
+
 }
