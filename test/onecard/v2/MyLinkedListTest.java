@@ -1,18 +1,34 @@
 package onecard.v2;
 
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MyLinkedListTest {
-    public static void main(String[] args) {
+
+    @Test
+    void method() {
         MyLinkedList myLinkedList = new MyLinkedList();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             myLinkedList.add(i);
         }
-
-
-        int size = myLinkedList.size();
-        System.out.println("size = " + size);
+        for (int i = 0; i < 20; i++) {
+            myLinkedList.next();
+            Node current = myLinkedList.getCurrent();
+            System.out.println("current = " + current);
+        }
 
     }
-
+    @Test
+    void method1() {
+        MyLinkedList myLinkedList = new MyLinkedList();
+        for (int i = 0; i < 5; i++) {
+            myLinkedList.add(i);
+        }
+        for (int i = 0; i < 20; i++) {
+            myLinkedList.prev();
+            Node current = myLinkedList.getCurrent();
+            System.out.println("current = " + current);
+        }
+    }
 }

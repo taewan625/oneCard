@@ -8,7 +8,6 @@ public class CardGame {
             Player player = new Player(i);
             playerLinkedList.add(player);
         }
-//        playerLinkedList.print(); // 일단 났두고 나중에 지울 것
     }
 
 
@@ -18,6 +17,13 @@ public class CardGame {
     }
 
 
+    void nextTurn(boolean bool) {
+        if (bool) {
+            playerLinkedList.next();
+        } else {
+            playerLinkedList.prev();
+        }
+    }
 
 
 
