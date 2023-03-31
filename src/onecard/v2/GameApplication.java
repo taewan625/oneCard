@@ -28,6 +28,7 @@ public class GameApplication {
         int submitCardIndex;
         OneCard submitCard;
         OneCard openCard = openDeck.getOpenCard();
+        boolean playerNextTurn = true;
 
         Player currentPlayer;
 
@@ -53,9 +54,9 @@ public class GameApplication {
 
 
         // 순서 회전
-        // boolean ->  q 적용시 true false 를 이용해서 next(), prev() 이용히기 -> 현재는 next()로 fix
+        // boolean - nextTurn() 만듬
         MyLinkedList playerLinkedList = cardGame.playerLinkedList;
-        playerLinkedList.next();
+        cardGame.nextTurn(playerNextTurn);
 
         while (true) {
             System.out.println("developMode");
@@ -104,7 +105,7 @@ public class GameApplication {
             }
 
             // 다음 턴
-            playerLinkedList.next();
+            cardGame.nextTurn(playerNextTurn);
         }
 //        } (true){
 //

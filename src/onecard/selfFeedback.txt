@@ -108,9 +108,27 @@ GameApplication 작성
 4. 플레이어 회전하도록 순서 linkedList next()이용
 <개발 모드 - 모든 필드 개수 체크>
 5. 카드 낼거 없을 때
-6. 카드 낼거 있을 때 -> openDeck 개수 안들었는데 field를 밖으로 지정하니깐 생긴 문제. 해결은 함 -- 내일 한번더 보기
+6. 카드 낼거 있을 때 -> openDeck 개수 안들었는데 field를 밖으로 지정하니깐 생긴 문제. 처음에 뭔가 잘 못한듯. 잘 작동함
+
+7. oneCarddeck 개수 적을 때 - reset()
+게임 종료 코드 작성
+oneCard class Equals() - 조커 범위 늘려주기 -> linkedList여서 equals 적용시 중복 제거
+
+
+
+3월 31일
+1. nextTurn() 생성
+todo
+1. 원카드 스킬 class에 skill method 작성 -> 해당 스킬 모든 경우의 수 TDD
+2. 해당 스킬 cardGame에서 switch문으로 작성한 method 만들기
+3. cardGame method를 cardApplication에 위치 넣는거 고민하고 다시 1,2 수정하기
 
 todo
-oneCarddeck 개수 적을 때 - reset()
-게임 종료 코드 작성
-oneCard class Equals() - 조커 범위 늘려주기
+1. 15장 이상이면 파산
+    1) 카드 회수
+    2) 순서에서 remove()
+
+2. 1,2,3...n등 까지 나오도록
+
+todo
+1. 원카드 시 원카드 안 외치면 턴 종료 직전에 안 외쳤다하면서 한장 먹이기
