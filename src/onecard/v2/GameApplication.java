@@ -27,8 +27,9 @@ public class GameApplication {
         // 필드
         int submitCardIndex;
         OneCard submitCard;
-        OneCard openCard = openDeck.getOpenCard();
+        OneCard openCard;
         boolean playerNextTurn = true;
+        boolean checkSubmittedCard;
 
         Player currentPlayer;
 
@@ -67,7 +68,7 @@ public class GameApplication {
 
             // 원카드 덱의 버려진 카드를 보관하는 오픈원카드 객체 생성 앞으로 여기서 제출한 최근 카드가 보일 것임
             System.out.println(" 오픈 카드 : " + openDeck);
-
+            openCard = openDeck.getOpenCard();
 
             // 현재 player와 playerDeck 보여줌
             currentPlayer = (Player) playerLinkedList.getCurrent().data;
@@ -75,35 +76,38 @@ public class GameApplication {
             System.out.println("제출할 카드의 위치에 맞는 번호를 넣으세요. (작성 예 : 첫번째 카드 부터 0,1,2,3)");
             System.out.println("제출할 수 있는 카드가 존재하지 않는다면 -1을 작성하세요. 카드를 한장 받고 턴을 종료합니다.");
 
-            // scanner 제출할 카드
+            // scanner 제출할 카드와 제출할 카드 index
             submitCardIndex = scanner.nextInt();
             submitCard = (0 <= submitCardIndex && submitCardIndex < currentPlayer.playerDeck.size()) ? currentPlayer.playerDeck.get(submitCardIndex) : null;
 
-            // 1. 제출 카드 없을 때 // 제출한 카드가 아래의 조건이 아닐 때 continue -> 이걸 CardGame class에 넣자
+
+            // 범위에 벗어난 수, 올바르지 않는 제출 카드 일때 continue
+            checkSubmittedCard = cardGame.checkSubmittedCard(submitCardIndex, submitCard, openCard, currentPlayer);
+            if (checkSubmittedCard) {
+                continue;
+            }
+
+            // 특수카드 발동 안할 때 게임 진행 - attackCard = 0 || 7번 카드가 아닐 때 if문 나중에 작성
             if (submitCardIndex == -1) {
                 System.out.println("제출할 카드가 없어서 카드 한 장 가져옵니다.");
                 dealer.giveCard(currentPlayer, 1);
-            } else if (!(0 <= submitCardIndex && submitCardIndex < currentPlayer.playerDeck.size())) {
-                System.out.println("주어진 범위 내의 숫자를 작성하세요");
-                continue;
-            } else if(!(submitCard.kind == openCard.kind || submitCard.number == openCard.number)) {
-                // joker 일 때 예외를 두기 - method(턴 종료 후 남은 카드 보여주기, 원카드 부족시 추가코드) 넣기
-                System.out.println("올바르지 않은 카드입니다. 다시 제출하세요");
-                continue;
-            } else {
-                dealer.getCard(openDeck, currentPlayer, currentPlayer.playerDeck.get(submitCardIndex));
-                //
+            }else {
+                // 제출한 카드 중 특수카드가 포함될 때 특수카드 능력 수행 후 종료
+                playerNextTurn = cardGame.gameRunning(submitCard, cardGame, playerNextTurn, openCard);
+                // 모든 카드 공통 작업
+                dealer.getCard(openDeck, currentPlayer, submitCard); // 자기카드 제출}
             }
+
+
 
             // 3. 턴종료 후 남은 카드 보여주기
             System.out.println(currentPlayer.getPlayerNum() + " player 턴이 종료됩니다. \n" + currentPlayer);
 
             // OneCardDeck에 card 부족시 추가하는 코드
             if (dealer.oneCardDeck.oneCardList.size() < 8) {
-                System.out.println(dealer.oneCardDeck.oneCardList);
+//                System.out.println(dealer.oneCardDeck.oneCardList);
                 dealer.resetCard(openDeck);
             }
-
             // 다음 턴
             cardGame.nextTurn(playerNextTurn);
         }

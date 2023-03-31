@@ -46,11 +46,11 @@ public class Dealer {
         oneCardDeck.oneCardList.removeAll(copyOneCards);
     }
 
-    void getCard(OpenDeck openDeck, Player player, OneCard card) {
+    void getCard(OpenDeck openDeck, Player player, OneCard submitCard) {
         // 중요 ->  매개변수를 잘 이용하면 class 안에 다른 class의 객체를 생성하지 않아도 해당 method처럼 활용이 가능하다.
         LinkedList<OneCard> playerDeck = player.playerDeck;
-        playerDeck.remove(card);
-        openDeck.openDeckList.add(card);
+        playerDeck.remove(submitCard);
+        openDeck.openDeckList.add(submitCard);
     }
 
 
