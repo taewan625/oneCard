@@ -15,8 +15,8 @@ public class GameApplication {
 
 
         // class 객체 생성
-        Dealer dealer = new Dealer();
-        CardGame cardGame = new CardGame();
+        Dealer dealer = new Dealer(); // 내부 - OneCardDeck 생성
+        CardGame cardGame = new CardGame(); // 내부 - MyLinkedList, OneCardSkill class 생성
         OpenDeck openDeck = new OpenDeck();
 
         // dealer - oneCardDeck shuffle, openDeck 1장 깔기
@@ -60,11 +60,14 @@ public class GameApplication {
         cardGame.nextTurn(playerNextTurn);
 
         while (true) {
-            System.out.println("developMode");
+            System.out.println("----------------developMode------------------");
             cardGame.playerLinkedList.print();
             System.out.println("oneCardDeck:" + dealer.oneCardDeck.oneCardList.size());
             System.out.println("openDeck: " + openDeck.openDeckList);
-            System.out.println("developModeFinish");
+            System.out.println("cardGame.attackCards = " + cardGame.attackCards);
+            System.out.println("cardGame.kindNum = " + cardGame.kindNum);
+            System.out.println("cardGame.kindBoolean = " + cardGame.skillBoolean);
+            System.out.println("-----------developModeFinish-------------------");
 
             // 원카드 덱의 버려진 카드를 보관하는 오픈원카드 객체 생성 앞으로 여기서 제출한 최근 카드가 보일 것임
             System.out.println(" 오픈 카드 : " + openDeck);
@@ -82,20 +85,17 @@ public class GameApplication {
 
 
             // 범위에 벗어난 수, 올바르지 않는 제출 카드 일때 continue
-            checkSubmittedCard = cardGame.checkSubmittedCard(submitCardIndex, submitCard, openCard, currentPlayer);
+            checkSubmittedCard = cardGame.checkSubmittedCard(submitCardIndex, submitCard, openCard, currentPlayer, dealer);
             if (checkSubmittedCard) {
                 continue;
             }
 
             // 특수카드 발동 안할 때 게임 진행 - attackCard = 0 || 7번 카드가 아닐 때 if문 나중에 작성
-            if (submitCardIndex == -1) {
-                System.out.println("제출할 카드가 없어서 카드 한 장 가져옵니다.");
-                dealer.giveCard(currentPlayer, 1);
-            }else {
+            if (submitCardIndex >= 0) {
                 // 제출한 카드 중 특수카드가 포함될 때 특수카드 능력 수행 후 종료
                 playerNextTurn = cardGame.gameRunning(submitCard, cardGame, playerNextTurn, openCard);
-                // 모든 카드 공통 작업
-                dealer.getCard(openDeck, currentPlayer, submitCard); // 자기카드 제출}
+                // 모든 카드 공통 작업 - 자기카드 제출
+                dealer.getCard(openDeck, currentPlayer, submitCard);
             }
 
 
@@ -138,33 +138,7 @@ public class GameApplication {
 //                kindChange = false;
 //            }
 //
-//            // 순서 변경 스킬
-//            growingNum = submitCard.oneCardSkillOrder(growingNum);
 //
-//            // 순서 변경 스킬
-//            if (submitCard.number == 11 && players.length > 2) {
-//                System.out.println("순서변경 카드 입니다. 역순으로 순서가 변경되었습니다");
-//                Player tmp;
-//                // q를 시전한 player 다음 플레이어 와 q를 시전한 player 이전 플레이어의 자리 바꿈
-//                tmp = players[growingNum % playerNum];
-//                players[growingNum % playerNum] = players[(growingNum - 2) % playerNum];
-//                players[(growingNum - 2) % playerNum] = tmp;
-//
-//                // player 번호도 변경해줌
-//                int tmp1;
-//                tmp1 = playerNumber[growingNum % playerNum];
-//                playerNumber[growingNum % playerNum] = playerNumber[(growingNum - 2) % playerNum];
-//                playerNumber[(growingNum - 2) % playerNum] = tmp1;
-//            }
-//
-//            // open 카드에 카드 추가
-//            openOneCard.getCard(submitCard);
-//
-//            // 개인 카드 제거
-//            players[orders].trashCard(submitCardIndex);
-//
-//            System.out.println("카드 제출에 성공했습니다. 턴을 종료합니다.");
-//            break;
 //        }
 
 
@@ -244,40 +218,8 @@ public class GameApplication {
 //                        } else {
 //                            kindChange = false;
 //                        }
-//
-//                        // 순서 변경 스킬
-//                        growingNum = submitCard.oneCardSkillOrder(growingNum);
-//
-//                        // 순서 변경 스킬
-//                        if (submitCard.number == 11 && players.length > 2) {
-//                            System.out.println("순서변경 카드 입니다. 역순으로 순서가 변경되었습니다");
-//                            Player tmp;
-//                            // q를 시전한 player 다음 플레이어 와 q를 시전한 player 이전 플레이어의 자리 바꿈
-//                            tmp = players[growingNum % playerNum];
-//                            players[growingNum % playerNum] = players[(growingNum - 2) % playerNum];
-//                            players[(growingNum - 2) % playerNum] = tmp;
-//
-//                            // player 번호도 변경해줌
-//                            int tmp1;
-//                            tmp1 = playerNumber[growingNum % playerNum];
-//                            playerNumber[growingNum % playerNum] = playerNumber[(growingNum - 2) % playerNum];
-//                            playerNumber[(growingNum - 2) % playerNum] = tmp1;
-//                        }
-//
-//                        // open 카드에 카드 추가
-//                        openOneCard.getCard(submitCard);
-//
-//                        // 개인 카드 제거
-//                        players[orders].trashCard(submitCardIndex);
-//
-//                        System.out.println("카드 제출에 성공했습니다. 턴을 종료합니다.");
-//                        System.out.println("do-while문 종료후 growingNum = " + growingNum);
-//                        break;
-//                    }
+//                   }
 //                }
-
-
-//                System.out.println("규칙에 맞는 카드번호를 제출하세요");
 
 //            // 카드 15 이상인 사람 존재시 그사람 제거, 그리고 남은 사람 1명이면 그사람 우승, 아니면 계속 진행
 //            // open pack에 카드 8장 이하면 onecard deck에 넣기
