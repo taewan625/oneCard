@@ -59,6 +59,25 @@ class CardGameTest {
         return data.getPlayerNum();
     }
 
+    @Test
+    void nextTurn() {
+        // player 수 설정
+        CardGame cardGame = new CardGame();
+        cardGame.playerList(4);
+
+        MyLinkedList playerLinkedList = cardGame.playerLinkedList;
+        boolean bool = true;
+
+        for (int i = 0; i < 15; i++) {
+            cardGame.nextTurn(bool);
+            if (i==6) bool = false;
+            Player data = (Player) (playerLinkedList.getCurrent()).data;
+            System.out.print(data.getPlayerNum() + "-");
+        }
+
+
+    }
+
 
 
     @Test
