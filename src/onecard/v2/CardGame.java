@@ -34,7 +34,45 @@ public class CardGame {
         }
     }
 
-    // 주어진 범위의 카드인지, 제출한 카드가 올바른 카드인지 체크
+    // skill card
+    void checkAttackCard(int cardNum, int cardKind, OneCard openCard) {
+        switch (cardNum) {
+            case 0: //A card
+                attackCards = oneCardSkill.ACard(openCard, attackCards);
+                break;
+            case 1: //2 card
+                attackCards = oneCardSkill.SecCard(openCard, attackCards);
+                break;
+            case 2: //3 card
+                attackCards =oneCardSkill.thrCard();
+                break;
+        }
+
+        switch (cardKind) {
+            case 4://ColorJoker
+                attackCards = oneCardSkill.ColorCard(openCard, attackCards);
+                break;
+            case 5://DarkJoker
+                attackCards = oneCardSkill.DarkCard(openCard, attackCards);
+                break;
+        }
+    }
+    // skill order card
+    boolean checkOrderSkillCard(int cardNum, CardGame cardGame, boolean playNextTurn) {
+        switch (cardNum) {
+            case 10://Jack card
+                oneCardSkill.Jack(cardGame, playNextTurn);
+                break;
+            case 11://Queen card
+                return oneCardSkill.Queen(playNextTurn);
+            case 12://King card
+                oneCardSkill.King(cardGame, playNextTurn);
+                break;
+        }
+        return playNextTurn;
+    }
+
+    // 주어진 범위의 카드인지, 제출한 카드가 올바른 카드인지, -1일 때(seven true/false) 조건에 맞게 비교하는지 확인하는 filter
     boolean submittedCardFilter(int submitCardIndex, OneCard submitCard, OneCard openCard, Player currentPlayer, Dealer dealer){
         //7번 카드가 직전에 나왔을 때 조건 생성
         int choiceKind = sevenBoolean==true ? kindNum : openCard.kind;
@@ -63,6 +101,7 @@ public class CardGame {
         sevenBoolean = false;
         return false;
     }
+    // 직전 제출카드가 skillCard 일때 filter 조건
     boolean skillSubmittedCardFilter(int submitCardIndex, OneCard submitCard, OneCard openCard, Player currentPlayer, Dealer dealer){
         if (submitCardIndex == -1 || openCard.kind == 4) {
             System.out.println("제출할 카드가 없어서 패널티카드를 가져오고 턴이 종료됩니다.");
@@ -83,43 +122,6 @@ public class CardGame {
         }
         System.out.println("올바르지 않은 카드입니다. 다시 제출하세요");
         return true;
-    }
-
-    // switch문
-    void checkAttackCard(int cardNum, int cardKind, OneCard openCard) {
-        switch (cardNum) {
-            case 0: //A card
-                attackCards = oneCardSkill.ACard(openCard, attackCards);
-                break;
-            case 1: //2 card
-                attackCards = oneCardSkill.SecCard(openCard, attackCards);
-                break;
-            case 2: //3 card
-                attackCards =oneCardSkill.thrCard();
-                break;
-        }
-
-        switch (cardKind) {
-            case 4://ColorJoker
-                attackCards = oneCardSkill.ColorCard(openCard, attackCards);
-                break;
-            case 5://DarkJoker
-                attackCards = oneCardSkill.DarkCard(openCard, attackCards);
-                break;
-        }
-    }
-    boolean checkOrderSkillCard(int cardNum, CardGame cardGame, boolean playNextTurn) {
-        switch (cardNum) {
-            case 10://Jack card
-                oneCardSkill.Jack(cardGame, playNextTurn);
-                break;
-            case 11://Queen card
-                return oneCardSkill.Queen(playNextTurn);
-            case 12://King card
-                oneCardSkill.King(cardGame, playNextTurn);
-                break;
-        }
-        return playNextTurn;
     }
 
     // 특수카드 발동 안할 때 게임 진행 - attackCard = 0, j , q , k
@@ -158,9 +160,8 @@ public class CardGame {
         if (cardNum == 0 || cardNum == 1 || cardNum == 2 || cardKind == 4 || cardKind == 5) {
             // 3번 card 제출이 아닌 이상 true -> 제출할 수 있는 카드는 공격카드 밖에 없기 때문
             skillBoolean = cardNum != 2;
+            // filter를 통과하는 card는 checkAttackCard()내부에 포함되는 카드밖에 없어서 공용으로 사용 가능
             checkAttackCard(cardNum, cardKind, openCard);
         }
     }
-
-
 } // class 끝

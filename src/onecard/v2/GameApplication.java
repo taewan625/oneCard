@@ -28,10 +28,10 @@ public class GameApplication {
         int submitCardIndex;
         OneCard submitCard;
         OneCard openCard;
-        boolean playerNextTurn = true;
+        boolean playerNextTurn = true; // v3. Card.game에 넣기
         boolean filterSubmittedCard;
 
-        Player currentPlayer;
+        Player currentPlayer; // v3. Player 내부에 넣기
 
         while (true) {
             System.out.println("플레이어수를 정하세요. 최소 2명에서 최대 7명까지 가능합니다.");
@@ -39,7 +39,7 @@ public class GameApplication {
             // 한번만 쓰고 버릴 변수는 lv로 작성
             int playerNum = scanner.nextInt();
 
-            // player 수에 맞게 player 생성, player 수에 따른 카드 배분
+            // player 수에 맞게 player 생성, player 수에 따른 카드 배분 v3. player 번호 직접 값 넣
             if (2 <= playerNum && playerNum <= 7) {
                 cardGame.playerList(playerNum);
                     for (int i = 0; i < playerNum; i++) {
@@ -56,7 +56,7 @@ public class GameApplication {
 
         // 순서 회전
         // boolean - nextTurn() 만듬
-        MyLinkedList playerLinkedList = cardGame.playerLinkedList;
+        MyLinkedList playerLinkedList = cardGame.playerLinkedList; //v3 MyLinkedList field 값으로 올리기
         cardGame.nextTurn(playerNextTurn);
 
         while (true) {
@@ -91,7 +91,7 @@ public class GameApplication {
                 continue;
             }
 
-            // 특수카드 발동 안할 때 게임 진행 - attackCard 아닌 경우만
+            // 특수카드 발동 안할 때 if문, 특수카드 발동 할 때 else-if문 실행 - attackCard 아닌 경우만
             if (submitCardIndex >= 0 && cardGame.skillBoolean==false) {
                 // 제출한 카드 중 특수카드가 포함될 때 특수카드 능력 수행 후 종료
                 playerNextTurn = cardGame.gameRunning(submitCard, cardGame, playerNextTurn, openCard);
@@ -108,21 +108,22 @@ public class GameApplication {
 
             // OneCardDeck에 card 부족시 추가하는 코드
             if (dealer.oneCardDeck.oneCardList.size() < 8) {
-//                System.out.println(dealer.oneCardDeck.oneCardList);
                 dealer.resetCard(openDeck);
             }
+
+            // 자신이 0이면 turn 종료
+            if (currentPlayer.playerDeck.size() == 0) {
+                System.out.println("우승자는 " + currentPlayer.getPlayerNum() + " player 입니다.");
+                System.exit(0);
+            }
+
+            // player 중 15장 이상이면 myLinkedList에서 제거하고 가지고 있는 카드 oneCard deck에 넣어주기
+            // 1. oneCard deck에 넣는 method() 생성
+            // 2. myLinkedList remove(); 이용
+
             // 다음 턴
             cardGame.nextTurn(playerNextTurn);
         }
-
-//            // 카드 15 이상인 사람 존재시 그사람 제거, 그리고 남은 사람 1명이면 그사람 우승, 아니면 계속 진행
-//            // open pack에 카드 8장 이하면 onecard deck에 넣기
-//
-//            // 자신이 0이면 turn 종료
-//            if (players[orders].playerOneCardArr.length == 0) {
-//                System.out.println("우승자는 " + playerNumber[orders] + " player 입니다.");
-//                System.exit(0);
-//            }
 
     } // main 끝
 }

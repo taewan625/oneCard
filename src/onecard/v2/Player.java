@@ -3,6 +3,7 @@ package onecard.v2;
 import java.util.LinkedList;
 
 class Player {
+    // v3 playerNum 직접 넣기 - int[] array사용하지 말기
     private int playerNum;
     final int[] PLAYER_NUM = {0,1,2,3,4,5,6};
     LinkedList<OneCard> playerDeck = new LinkedList<>();
