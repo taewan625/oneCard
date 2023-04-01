@@ -16,35 +16,33 @@ public class OneCardSkill {
     }
 
 
-    int Acard(OneCard openCard, OneCard submitCard, int attackCards) {
-        if (openCard.number == submitCard.number) {
+    int ACard(OneCard openCard, int attackCards) {
+        if (openCard.number == 0 || openCard.number == 1 ) {
             return attackCards + 3;
         }
         return 3;
     }
-    int SecCard(OneCard openCard, OneCard submitCard, int attackCards) {
-        if (openCard.number == submitCard.number) {
+    int SecCard(OneCard openCard, int attackCards) {
+        if (openCard.number == 1) {
             return attackCards + 2;
         }
         return 2;
     }
-//    int thrdCard(OneCard openCard, OneCard submitCard, int attackCards){
-//        if (openCard.kind == submitCard.kind && (openCard.number == 0 || openCard.number == 1)) {
-//            return 0;
-//        }
-//        return attackCards;
-//    }
+    int thrCard(){
+        return 0;
+    }
+
     int DarkCard(OneCard openCard, int attackCards) {
         // attack
-        if (openCard.number == 0) {
+        if (openCard.number == 0 || openCard.number == 1) {
             return attackCards + 5;
         }
         return 5;
     }
     int ColorCard(OneCard openCard, int attackCards) {
         // attack
-        if (openCard.number == 0) {
-            return attackCards + 5;
+        if (openCard.number == 0 || openCard.number == 1 || openCard.kind == 5) {
+            return attackCards + 7;
         }
         return 7;
     }

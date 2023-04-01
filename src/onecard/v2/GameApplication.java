@@ -29,7 +29,7 @@ public class GameApplication {
         OneCard submitCard;
         OneCard openCard;
         boolean playerNextTurn = true;
-        boolean checkSubmittedCard;
+        boolean filterSubmittedCard;
 
         Player currentPlayer;
 
@@ -85,20 +85,23 @@ public class GameApplication {
 
 
             // 범위에 벗어난 수, 올바르지 않는 제출 카드 일때 continue
-            checkSubmittedCard = cardGame.checkSubmittedCard(submitCardIndex, submitCard, openCard, currentPlayer, dealer);
-            if (checkSubmittedCard) {
+            filterSubmittedCard = (cardGame.skillBoolean == false) ? cardGame.submittedCardFilter(submitCardIndex, submitCard, openCard, currentPlayer, dealer)
+                    : cardGame.skillSubmittedCardFilter(submitCardIndex, submitCard, openCard, currentPlayer, dealer);
+            if (filterSubmittedCard) {
                 continue;
             }
 
-            // 특수카드 발동 안할 때 게임 진행 - attackCard = 0 || 7번 카드가 아닐 때 if문 나중에 작성
-            if (submitCardIndex >= 0) {
+            // 특수카드 발동 안할 때 게임 진행 - attackCard 아닌 경우만
+            if (submitCardIndex >= 0 && cardGame.skillBoolean==false) {
                 // 제출한 카드 중 특수카드가 포함될 때 특수카드 능력 수행 후 종료
                 playerNextTurn = cardGame.gameRunning(submitCard, cardGame, playerNextTurn, openCard);
                 // 모든 카드 공통 작업 - 자기카드 제출
                 dealer.getCard(openDeck, currentPlayer, submitCard);
+            } else if(submitCardIndex >= 0 && cardGame.skillBoolean==true) {
+                // 제출한 카드 중 특수카드가 포함될 때 특수카드 능력 수행 후 종료
+                cardGame.skillGameRunning(submitCard, openCard);
+                dealer.getCard(openDeck, currentPlayer, submitCard);
             }
-
-
 
             // 3. 턴종료 후 남은 카드 보여주기
             System.out.println(currentPlayer.getPlayerNum() + " player 턴이 종료됩니다. \n" + currentPlayer);
@@ -111,115 +114,6 @@ public class GameApplication {
             // 다음 턴
             cardGame.nextTurn(playerNextTurn);
         }
-//        } (true){
-//
-//
-//        }
-//
-//
-//
-//        if (submitCard.kind == openOneCardFirstOne.kind
-//                || submitCard.kind == openOneCardFirstOne.kind1
-//                || submitCard.kind == openOneCardFirstOne.kind2
-//                || submitCard.number == openOneCardFirstOne.number
-//                || submitCard.kind1 == openOneCardFirstOne.kind
-//                || submitCard.kind2 == openOneCardFirstOne.kind
-//        ) {
-//
-//            // 카드 스킬 발동
-//            // 공격 스킬
-//            attackCard = submitCard.oneCardSkillAttack();
-//
-//            // 종류 변경 스킬
-//            selectKind = submitCard.oneCardSkillKindChange(scanner);
-//            if (selectKind >= 0) {
-//                kindChange = true;
-//            } else {
-//                kindChange = false;
-//            }
-//
-//
-//        }
-
-
-
-//        while (true) {
-//
-//            OneCard openOneCardFirstOne = openOneCard.openOneCardArr[0];
-//            System.out.println();
-//            if (!kindChange) {
-//                System.out.println("해당 카드를 보고 같은 모양 혹은 숫자를 제출하세요 : " + openOneCardFirstOne);
-//            } else {
-//                String[] kinds = {"CLOVER", "HEART", "DIAMOND", "SPADE"};
-//                System.out.println("해당 카드와 동일한 모양을 제출하세요 : " + kinds[selectKind]);
-//            }
-//        }
-
-            // 내부 while문 - 각 플레이어 턴이 완벽히 종료되면 해당 while문을 벗어날 수 있다.
-/**
-/////////////////// 공격카드가 존재시 해당턴에 카드 먹고 다음 사람 턴으로 넘어감
-//                if (attackCard != 0) {
-//                    System.out.println((playerNumber[orders]) + " 번 플레이어 차레입니다.");
-//                    System.out.println("보유 카드 : " + players[orders]);
-//                    System.out.println("직전의 공격 카드로 인해서 원카드 덱에서 카들를 먹고 턴을 종료합니다.");
-//                    // 원카드 덱 n장 없애기
-//                    OneCard[] giveCardsArr = oneCardDeck.giveCard(attackCard);
-//                    // 원카드 덱으로 부터 n장 받아오기
-//                    players[orders].getCard(giveCardsArr);
-//                    attackCard = 0;
-//                    break;
-//                }
-//
-//                // 몇번 플레이어 차례인지, 터미널에서 번호를 통해 제출 할수 있도록 알려줌
-//                System.out.println(playerNumber[orders] + " 번 플레이어 차레입니다.");
-//                System.out.println("보유 카드 : " + players[orders]);
-//                System.out.println("제출할 카드의 위치에 맞는 번호를 넣으세요. 작성 예 : 첫번째 카드 부터 0,1,2,3");
-//                System.out.println("제출할 수 있는 카드가 존재하지 않는다면 -1을 작성하세요. 카드를 한장 받고 턴을 종료합니다.");
-//                // 제출한 카드
-//                submitCardIndex = scanner.nextInt();
-//
-//
-//                // 제출할 카드가 존재하지 않을 시
-//                if (submitCardIndex == -1) {
-//                    System.out.println("제출할 카드가 없어서 카드한장을 원카드 덱으로 부터 가져온 후 턴을 종료합니다.");
-//                    System.out.println();
-//                    System.out.println("카드 한 장을 가져옵니다.");
-//                    // 원카드 덱 1장 없애기
-//                    OneCard[] giveCardsArr = oneCardDeck.giveCard(1);
-//                    // 원카드 덱으로 부터 1장 받아오기
-//                    players[orders].getCard(giveCardsArr);
-//                    break;
-//                }
-*/
-
-/////////////////////// 제출한 카드가 아래의 조건이 아닐 때 내부 do-while문 continue 돌림
-//                if (!(0 <= submitCardIndex && submitCardIndex < players[orders].playerOneCardArr.length)) {
-//                    System.out.println("주어진 범위 내의 숫자를 작성하세요");
-//                    continue;
-//                }
-//
-//                // 선택한 player 카드 객체
-//                submitCard = players[orders].playerOneCardArr[submitCardIndex];
-//
-//                // 7번 카드로 모양이 변경되었을 때의 다음으로 넘어갈 수 있는 조건문
-//                if (kindChange == true) {
-//                    if (submitCard.kind == selectKind
-//                            || submitCard.kind1 == selectKind
-//                            || submitCard.kind2 == selectKind) {
-//
-//                        // 카드 스킬 발동
-//                        // 공격 스킬
-//                        attackCard = submitCard.oneCardSkillAttack();
-//
-//                        // 종류 변경 스킬
-//                        selectKind = submitCard.oneCardSkillKindChange(scanner);
-//                        if (selectKind >= 0) {
-//                            kindChange = true;
-//                        } else {
-//                            kindChange = false;
-//                        }
-//                   }
-//                }
 
 //            // 카드 15 이상인 사람 존재시 그사람 제거, 그리고 남은 사람 1명이면 그사람 우승, 아니면 계속 진행
 //            // open pack에 카드 8장 이하면 onecard deck에 넣기

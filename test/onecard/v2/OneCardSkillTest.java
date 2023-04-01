@@ -59,8 +59,7 @@ class OneCardSkillTest {
 
     int AAttack() {
         OneCard openCard = new OneCard(1, 0);
-        OneCard submitCard = new OneCard(0, 0);
-        attackCard = oneCardSkill.Acard(openCard, submitCard, attackCard);
+        attackCard = oneCardSkill.ACard(openCard, attackCard);
         return attackCard;
     }
 

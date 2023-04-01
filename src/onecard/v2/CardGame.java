@@ -35,7 +35,7 @@ public class CardGame {
     }
 
     // 주어진 범위의 카드인지, 제출한 카드가 올바른 카드인지 체크
-    boolean checkSubmittedCard(int submitCardIndex, OneCard submitCard, OneCard openCard, Player currentPlayer, Dealer dealer){
+    boolean submittedCardFilter(int submitCardIndex, OneCard submitCard, OneCard openCard, Player currentPlayer, Dealer dealer){
         //7번 카드가 직전에 나왔을 때 조건 생성
         int choiceKind = sevenBoolean==true ? kindNum : openCard.kind;
         if (submitCardIndex == -1) {
@@ -63,63 +63,42 @@ public class CardGame {
         sevenBoolean = false;
         return false;
     }
-
-    void skillCardfilter(OneCard openCard, OneCard submitCard){
-        int kind = openCard.kind;
-        int number = openCard.number;
-        switch (number) {
-            case 0:
-                if (submitCard.number==0 || submitCard.number==1|| submitCard.number==2);
-                break;
-            case 1:
-                break;
-        }
-        switch (kind) {
-            case 4:
-                break;
-            case 5:
-                break;
-        }
-    }
-
-
-    boolean skillCheckSubmittedCard(int submitCardIndex, OneCard submitCard, OneCard openCard, Player currentPlayer, Dealer dealer){
-        if (attackCards==0){
-
-        }
-        if (submitCardIndex == -1) {
-            System.out.println("제출할 카드가 없어서 카드 한 장 가져옵니다.");
-            int giveCards = attackCards > 0 ? attackCards : 1;
-            skillBoolean = attackCards != 0;
+    boolean skillSubmittedCardFilter(int submitCardIndex, OneCard submitCard, OneCard openCard, Player currentPlayer, Dealer dealer){
+        if (submitCardIndex == -1 || openCard.kind == 4) {
+            System.out.println("제출할 카드가 없어서 패널티카드를 가져오고 턴이 종료됩니다.");
+            dealer.giveCard(currentPlayer, attackCards);
+            skillBoolean = false;
             attackCards = 0;
-            dealer.giveCard(currentPlayer, giveCards);
             return false;
-        } else if ((submitCard.kind == 4 && (openCard.kind == 1 || openCard.kind == 2)) ||
-                (submitCard.kind == 5 && (openCard.kind == 0 || openCard.kind == 3))) {
+        } else if (openCard.number == 0 && (submitCard.number == 0 || submitCard.kind == 4 || submitCard.kind == 5)) {
             return false;
-        } else if ((openCard.kind == 4 && (submitCard.kind == 1 || submitCard.kind == 2)) ||
-                (openCard.kind == 5 && (submitCard.kind == 0 || submitCard.kind == 3))) {
+        } else if (openCard.number == 1 && (submitCard.number == 0 || submitCard.number == 1 || submitCard.number == 2
+                || submitCard.kind == 4 || submitCard.kind == 5)) {
+            return false;
+        } else if (openCard.kind == 5 && submitCard.kind == 4) {
             return false;
         } else if (0 > submitCardIndex || submitCardIndex >= currentPlayer.playerDeck.size()) {
             System.out.println("주어진 범위 내의 숫자를 작성하세요");
             return true;
-        } else if (submitCard.kind != kindNum ) {
-            System.out.println("올바르지 않은 카드입니다. 다시 제출하세요");
-            return true;
         }
-        return false;
+        System.out.println("올바르지 않은 카드입니다. 다시 제출하세요");
+        return true;
     }
 
     // switch문
-    void checkAttackCard(int cardNum, int cardKind, OneCard submitCard, OneCard openCard) {
+    void checkAttackCard(int cardNum, int cardKind, OneCard openCard) {
         switch (cardNum) {
             case 0: //A card
-                attackCards = oneCardSkill.Acard(openCard, submitCard, attackCards);
+                attackCards = oneCardSkill.ACard(openCard, attackCards);
                 break;
             case 1: //2 card
-                attackCards = oneCardSkill.SecCard(openCard, submitCard, attackCards);
+                attackCards = oneCardSkill.SecCard(openCard, attackCards);
+                break;
+            case 2: //3 card
+                attackCards =oneCardSkill.thrCard();
                 break;
         }
+
         switch (cardKind) {
             case 4://ColorJoker
                 attackCards = oneCardSkill.ColorCard(openCard, attackCards);
@@ -154,7 +133,7 @@ public class CardGame {
             return checkOrderSkillCard(cardNum, cardGame, playNextTurn);
         }
         if (cardNum == 0 || cardNum == 1 || cardKind == 4 || cardKind == 5) {
-            checkAttackCard(cardNum, cardKind, submitCard, openCard);
+            checkAttackCard(cardNum, cardKind, openCard);
             skillBoolean = true;
         }
         if (cardNum == 6) {
@@ -167,21 +146,20 @@ public class CardGame {
     }
 
     // 특수카드 발동 할 때 게임 진행 - attackCard = n, 7번
-    boolean SkillGameRunning(OneCard submitCard, CardGame cardGame, boolean playNextTurn, OneCard openCard) {
+    void skillGameRunning(OneCard submitCard, OneCard openCard) {
         // openCard가 아래의 조건일 때 기준으로 작성
-        // 7번일 때
         // A일 때
         // 2일 때
+        // 3일 때
         // joker 일 때
         int cardNum = submitCard.number;
         int cardKind = submitCard.kind;
-        if (cardNum == 10 || cardNum == 11 || cardNum == 12) {
-            return checkOrderSkillCard(cardNum, cardGame, playNextTurn);
+
+        if (cardNum == 0 || cardNum == 1 || cardNum == 2 || cardKind == 4 || cardKind == 5) {
+            // 3번 card 제출이 아닌 이상 true -> 제출할 수 있는 카드는 공격카드 밖에 없기 때문
+            skillBoolean = cardNum != 2;
+            checkAttackCard(cardNum, cardKind, openCard);
         }
-        if (cardNum == 0 || cardNum == 1 || cardNum == 2 || cardKind ==4 || cardKind ==5){
-            checkAttackCard(cardNum, cardKind, submitCard, openCard);
-        }
-        return playNextTurn;
     }
 
 

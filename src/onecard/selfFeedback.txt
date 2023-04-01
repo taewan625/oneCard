@@ -123,7 +123,7 @@ oneCard class Equals() - 조커 범위 늘려주기 -> linkedList여서 equals �
    이후 다시 filter 할 때 seven이 true이면 7일 때 작게 만든 scanner에서 가져온 kind num을 openCard.kind의 값을 대신해서 넣으면 된다.
    이때 openCard.kind는 getLast()로 들고오는 거여서 실제 oneCard 객체 주소를 보내는 것이기때문에 건들이지 않고 ? 함수로 choise kind 생성
    그리고 filter에서 return true인 곳을 제외하고 모든 sevenboolean = false로 지정해 준다. -> 그래야 향후 문제가 안 생김
-   
+
 todo
 1. 원카드 스킬 class에 skill method 작성 -> 해당 스킬 모든 경우의 수 TDD
 2. 해당 스킬 cardGame에서 switch문으로 작성한 method 만들기
