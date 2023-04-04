@@ -24,14 +24,16 @@ public class MyTreeSet {
         return sb.toString();
     }
 
+    // 중위 순회 -> tree 형태의 노드들이 어떻게 연결되었는지 그림을 그려보면 재귀호출이 무한 루프에 빠지지 않는다는 것을 알 수 있다.
     private void inOrderTraversal(TreeNode node, StringBuilder sb) {
         if (node == null) {
             return;
         }
-
-        inOrderTraversal(node.left, sb); // 재귀함수로 제일 왼쪽으로 이동
-        sb.append(node.element).append(" "); // 왼쪽부터 값넣기
-        inOrderTraversal(node.right, sb); // 오른쪽으로 넘어가기
+        inOrderTraversal(node.left, sb);
+        // 왼쪽부터 값넣기 -> 그림을 그려보면 root를 기준으로 오른쪽으로 갈 때 각각의 TreeNode의 left는 null인 것을 알 수 있다.
+        sb.append(node.element).append(" ");
+        inOrderTraversal(node.right, sb);
+        // 오른쪽으로 넘어가기 -> 그림을 그려보면 root를 기준으로 왼쪽으로 가는 각각의 TreeNode의 right는 null인 것을 알 수 있다.
     }
 
     public void add(int element) {
