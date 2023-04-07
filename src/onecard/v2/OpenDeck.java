@@ -2,6 +2,7 @@ package onecard.v2;
 
 import java.util.LinkedList;
 
+// V3. GameApplication이 아니라 Dealer에 new OpenDeck해서 들어가있는게 나을 거 같은데
 class OpenDeck {
 
     LinkedList<OneCard> openDeckList = new LinkedList<>();

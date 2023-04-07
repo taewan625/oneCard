@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class CardGame {
     Scanner scanner = new Scanner(System.in);
-    MyLinkedList playerLinkedList = new MyLinkedList();
+    MyLinkedList playerLinkedList = new MyLinkedList(); // v3. 얘도 Player 쪽으로 가는게 나을 듯
     OneCardSkill oneCardSkill = new OneCardSkill();
 
     int attackCards = 0;
@@ -12,6 +12,7 @@ public class CardGame {
     boolean skillBoolean = false;
     boolean sevenBoolean = false;
 
+    // v3. Player class랑 myLinkedList랑 관계를 엮는게 나을 거 같은데.. 여기랑 안어울림
     void playerList(int playerNum) {
         for (int i = 0; i < playerNum; i++) {
             Player player = new Player(i);
@@ -44,7 +45,7 @@ public class CardGame {
                 attackCards = oneCardSkill.SecCard(openCard, attackCards);
                 break;
             case 2: //3 card
-                attackCards =oneCardSkill.thrCard();
+                attackCards = oneCardSkill.thrCard();
                 break;
         }
 

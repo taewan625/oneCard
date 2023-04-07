@@ -161,3 +161,9 @@ todo
 4. filed 값은 private 으로 해서 getter, setter 이용하기
 5. 코드 분리해서 1,2,3 단계 순서로 tdd 까지 수행
 -> 2.class를 만들때 도저히 안되겠어서 3.classApp과 동시에 작업 -> tdd 수행 못함 - tdd 수행하기
+
+
+6. v3 진행전 v2 설계도 생성 - https://code-is-me.tistory.com/114
+   1) params 줄이기
+   2) class 상속 변경 - cardGame 의 player, MylinkedList 를 Player로 이동
+   3) cardGame method 중 추상 class 혹은 interface로 변경

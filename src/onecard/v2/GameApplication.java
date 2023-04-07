@@ -60,14 +60,14 @@ public class GameApplication {
         cardGame.nextTurn(playerNextTurn);
 
         while (true) {
-            System.out.println("----------------developMode------------------");
+           /* System.out.println("----------------developMode------------------");
             cardGame.playerLinkedList.print();
             System.out.println("oneCardDeck:" + dealer.oneCardDeck.oneCardList.size());
             System.out.println("openDeck: " + openDeck.openDeckList);
             System.out.println("cardGame.attackCards = " + cardGame.attackCards);
             System.out.println("cardGame.kindNum = " + cardGame.kindNum);
             System.out.println("cardGame.kindBoolean = " + cardGame.skillBoolean);
-            System.out.println("-----------developModeFinish-------------------");
+            System.out.println("-----------developModeFinish-------------------");*/
 
             // 원카드 덱의 버려진 카드를 보관하는 오픈원카드 객체 생성 앞으로 여기서 제출한 최근 카드가 보일 것임
             System.out.println(" 오픈 카드 : " + openDeck);
@@ -81,12 +81,15 @@ public class GameApplication {
 
             // scanner 제출할 카드와 제출할 카드 index
             submitCardIndex = scanner.nextInt();
-            submitCard = (0 <= submitCardIndex && submitCardIndex < currentPlayer.playerDeck.size()) ? currentPlayer.playerDeck.get(submitCardIndex) : null;
+            submitCard = (0 <= submitCardIndex && submitCardIndex < currentPlayer.playerDeck.size())
+                    ? currentPlayer.playerDeck.get(submitCardIndex) : null;
 
 
             // 범위에 벗어난 수, 올바르지 않는 제출 카드 일때 continue
-            filterSubmittedCard = (cardGame.skillBoolean == false) ? cardGame.submittedCardFilter(submitCardIndex, submitCard, openCard, currentPlayer, dealer)
+            filterSubmittedCard = (cardGame.skillBoolean == false)
+                    ? cardGame.submittedCardFilter(submitCardIndex, submitCard, openCard, currentPlayer, dealer)
                     : cardGame.skillSubmittedCardFilter(submitCardIndex, submitCard, openCard, currentPlayer, dealer);
+
             if (filterSubmittedCard) {
                 continue;
             }
