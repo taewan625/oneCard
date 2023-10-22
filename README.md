@@ -12,3 +12,7 @@
 
 ## 구현한 List 기록
 - https://code-is-me.tistory.com/92
+
+## Class Design
+![class design](https://github.com/taewan625/oneCard/blob/main/oneCardV2L.jpeg)
+![class design2](https://github.com/taewan625/oneCard/blob/main/oneCardV2R.jpeg)
