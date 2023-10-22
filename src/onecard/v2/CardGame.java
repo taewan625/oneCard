@@ -22,8 +22,7 @@ public class CardGame {
 
 
     Player getPlayer(int index){
-        Player player = (Player) (playerLinkedList.get(index)).data;
-        return player;
+        return (Player) (playerLinkedList.get(index)).data;
     }
 
 
@@ -38,37 +37,22 @@ public class CardGame {
     // skill card
     void checkAttackCard(int cardNum, int cardKind, OneCard openCard) {
         switch (cardNum) {
-            case 0: //A card
-                attackCards = oneCardSkill.ACard(openCard, attackCards);
-                break;
-            case 1: //2 card
-                attackCards = oneCardSkill.SecCard(openCard, attackCards);
-                break;
-            case 2: //3 card
-                attackCards = oneCardSkill.thrCard();
-                break;
+            case 0 -> attackCards = oneCardSkill.ACard(openCard, attackCards); //A card
+            case 1 -> attackCards = oneCardSkill.SecCard(openCard, attackCards); //2 card
+            case 2 -> attackCards = oneCardSkill.thrCard(); //3 card
         }
 
         switch (cardKind) {
-            case 4://ColorJoker
-                attackCards = oneCardSkill.ColorCard(openCard, attackCards);
-                break;
-            case 5://DarkJoker
-                attackCards = oneCardSkill.DarkCard(openCard, attackCards);
-                break;
+            case 4 -> attackCards = oneCardSkill.ColorCard(openCard, attackCards);//ColorJoker
+            case 5 -> attackCards = oneCardSkill.DarkCard(openCard, attackCards); //DarkJoker
         }
     }
     // skill order card
     boolean checkOrderSkillCard(int cardNum, CardGame cardGame, boolean playNextTurn) {
         switch (cardNum) {
-            case 10://Jack card
-                oneCardSkill.Jack(cardGame, playNextTurn);
-                break;
-            case 11://Queen card
-                return oneCardSkill.Queen(playNextTurn);
-            case 12://King card
-                oneCardSkill.King(cardGame, playNextTurn);
-                break;
+            case 10 -> oneCardSkill.Jack(cardGame, playNextTurn);//Jack card
+            case 11 -> { return oneCardSkill.Queen(playNextTurn);}//Queen card
+            case 12 -> oneCardSkill.King(cardGame, playNextTurn);//King card
         }
         return playNextTurn;
     }
@@ -76,7 +60,7 @@ public class CardGame {
     // 주어진 범위의 카드인지, 제출한 카드가 올바른 카드인지, -1일 때(seven true/false) 조건에 맞게 비교하는지 확인하는 filter
     boolean submittedCardFilter(int submitCardIndex, OneCard submitCard, OneCard openCard, Player currentPlayer, Dealer dealer){
         //7번 카드가 직전에 나왔을 때 조건 생성
-        int choiceKind = sevenBoolean==true ? kindNum : openCard.kind;
+        int choiceKind = sevenBoolean ? kindNum : openCard.kind;
         if (submitCardIndex == -1) {
             System.out.println("제출할 카드가 없어서 카드 한 장 가져옵니다.");
             dealer.giveCard(currentPlayer, 1);

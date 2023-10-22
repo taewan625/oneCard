@@ -25,7 +25,7 @@ public class Dealer {
         List<OneCard> oneCards = oneCardDeck.oneCardList.subList(0, cards);
         openDeckList.addAll(oneCards);
 
-        LinkedList copyOneCards = new LinkedList<>(oneCards);
+        LinkedList<OneCard> copyOneCards = new LinkedList<>(oneCards);
         oneCardDeck.oneCardList.removeAll(copyOneCards);
     }
 
@@ -42,7 +42,7 @@ public class Dealer {
          * 해결 :
          * 복사본을 만들어서 복사본에서 removeAll() 수행
          */
-        LinkedList copyOneCards = new LinkedList<>(oneCards);
+        LinkedList<OneCard> copyOneCards = new LinkedList<>(oneCards);
         oneCardDeck.oneCardList.removeAll(copyOneCards);
     }
 
@@ -60,7 +60,7 @@ public class Dealer {
         List<OneCard> oneCards = openDeck.openDeckList.subList(0, size - 1);
         oneCardDeck.oneCardList.addAll(oneCards);
 
-        LinkedList copyOneCards = new LinkedList<>(oneCards);
+        LinkedList<OneCard> copyOneCards = new LinkedList<>(oneCards);
         openDeck.openDeckList.removeAll(copyOneCards);
         shuffleOneCardDeck();
     }

@@ -86,7 +86,7 @@ public class GameApplication {
 
 
             // 범위에 벗어난 수, 올바르지 않는 제출 카드 일때 continue
-            filterSubmittedCard = (cardGame.skillBoolean == false)
+            filterSubmittedCard = (!cardGame.skillBoolean)
                     ? cardGame.submittedCardFilter(submitCardIndex, submitCard, openCard, currentPlayer, dealer)
                     : cardGame.skillSubmittedCardFilter(submitCardIndex, submitCard, openCard, currentPlayer, dealer);
 
@@ -95,12 +95,12 @@ public class GameApplication {
             }
 
             // 특수카드 발동 안할 때 if문, 특수카드 발동 할 때 else-if문 실행 - attackCard 아닌 경우만
-            if (submitCardIndex >= 0 && cardGame.skillBoolean==false) {
+            if (submitCardIndex >= 0 && !cardGame.skillBoolean) {
                 // 제출한 카드 중 특수카드가 포함될 때 특수카드 능력 수행 후 종료
                 playerNextTurn = cardGame.gameRunning(submitCard, cardGame, playerNextTurn, openCard);
                 // 모든 카드 공통 작업 - 자기카드 제출
                 dealer.getCard(openDeck, currentPlayer, submitCard);
-            } else if(submitCardIndex >= 0 && cardGame.skillBoolean==true) {
+            } else if(submitCardIndex >= 0) {
                 // 제출한 카드 중 특수카드가 포함될 때 특수카드 능력 수행 후 종료
                 cardGame.skillGameRunning(submitCard, openCard);
                 dealer.getCard(openDeck, currentPlayer, submitCard);
